@@ -19,7 +19,11 @@ class Page {
             AutenticarApi.logar($(this).serialize(), Page.logar.callbacks);
         },
         callbacks(r) {
-            Preload.hide();
+            localStorage.setItem('tokenmysystem', r.token);
+            localStorage.setItem('expired', Date.now() + (r.expires_in * 1000));
+            localStorage.setItem('name', r.user.name);
+            localStorage.setItem('email', r.user.email);
+            location.href = '/';
         }
     }
 }

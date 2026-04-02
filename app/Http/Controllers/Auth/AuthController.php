@@ -37,7 +37,11 @@ class AuthController extends Controller
                 return response('Não autenticado', 401);
             }
 
-            return response()->json(['token' => $token]);
+            return response()->json([
+                'token' => $token,
+                'expires_in' => JWTAuth::factory()->getTTL() * 60, // em segundos
+                'user' => JWTAuth::user()
+            ]);
         } catch (\Throwable $th) {
             return response($th->getMessage(), 500);
         }
@@ -52,6 +56,10 @@ class AuthController extends Controller
     public function refresh()
     {
         $newToken = JWTAuth::refresh(JWTAuth::getToken());
-        return response()->json(['token' => $newToken]);
+        return response()->json([
+            'token' => $newToken,
+            'expires_in' => JWTAuth::factory()->getTTL() * 60, // em segundos
+            'user' => JWTAuth::user()
+        ]);
     }
 }
