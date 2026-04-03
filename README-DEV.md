@@ -61,7 +61,21 @@ php artisan key:generate
 # Gerar chave JWT
 php artisan jwt:secret
 ```
+### 3. Localização (Português)
+O projeto está configurado para usar português brasileiro (`pt_BR`) como idioma padrão.
 
+**Configuração automática:**
+```env
+# No .env
+APP_LOCALE=pt_BR
+APP_FALLBACK_LOCALE=pt_BR
+```
+
+**Arquivos de tradução criados:**
+- `lang/pt_BR/auth.php` - Mensagens de autenticação
+- `lang/pt_BR/validation.php` - Mensagens de validação
+- `lang/pt_BR/passwords.php` - Reset de senha
+- `lang/pt_BR/pagination.php` - Paginação
 ---
 
 ## ⚙️ Configuração
@@ -76,6 +90,8 @@ APP_ENV=local
 APP_KEY=base64:...
 APP_DEBUG=true
 APP_URL=http://localhost:8000
+APP_LOCALE=pt_BR
+APP_FALLBACK_LOCALE=pt_BR
 
 # Banco de Dados
 DB_CONNECTION=mysql
@@ -171,18 +187,36 @@ POST /api/auth/refresh   # Renovar token
 GET  /api/auth/me        # Dados do usuário
 ```
 
-### Estrutura de Resposta JWT:
+### Estrutura de Resposta JWT (Português):
 ```json
 {
   "access_token": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9...",
   "token_type": "bearer",
   "expires_in": 3600,
+  "message": "Login realizado com sucesso",
   "user": {
     "id": 1,
     "name": "Usuario",
     "email": "user@example.com"
   }
 }
+```
+
+### Exemplo AuthController com Traduções:
+```php
+// Login
+return response()->json([
+    'access_token' => $token,
+    'token_type' => 'bearer',
+    'expires_in' => auth()->factory()->getTTL() * 60,
+    'message' => __('auth.login_success'),
+    'user' => auth()->user()
+]);
+
+// Erro de login
+return response()->json([
+    'error' => __('auth.failed')
+], 401);
 ```
 
 ---
@@ -215,6 +249,55 @@ php artisan migrate --force
 - [ ] SSL configurado
 - [ ] Assets buildados (`npm run build`)
 - [ ] Caches otimizados
+
+---
+
+## 🌐 Localização e Traduções
+
+### Uso das Traduções no Código:
+
+#### **Controller/Blade:**
+```php
+// Retornar mensagens traduzidas em JSON/API
+return response()->json([
+    'message' => __('auth.login_success'),
+    'error' => __('auth.failed')
+]);
+
+// Blade templates
+{{ __('validation.required', ['attribute' => 'nome']) }}
+@lang('auth.login_success')
+```
+
+#### **Validação Automática:**
+```php
+// Request validation (já traduzido automaticamente)
+$request->validate([
+    'email' => 'required|email',
+    'password' => 'required|min:6'
+]);
+// Retorna: "O campo e-mail é obrigatório."
+```
+
+#### **Mensagens Customizadas:**
+```php
+// Adicionar em lang/pt_BR/validation.php
+'custom' => [
+    'email' => [
+        'required' => 'O email é obrigatório para login.',
+        'email' => 'Digite um email válido.'
+    ]
+]
+```
+
+### Estrutura de Arquivos de Tradução:
+```
+lang/pt_BR/
+├── auth.php          # Login, logout, tokens
+├── pagination.php    # Links de paginação
+├── passwords.php     # Reset de senha
+└── validation.php    # Validação de formulários
+```
 
 ---
 
@@ -309,6 +392,21 @@ npm run dev
 
 # Build para produção
 npm run build
+```
+
+#### **Traduções não aparecem em português**
+```bash
+# Verificar locale no .env
+APP_LOCALE=pt_BR
+APP_FALLBACK_LOCALE=pt_BR
+
+# Limpar cache
+php artisan config:clear
+
+# Testar tradução
+php artisan tinker
+>>> __('auth.login_success')
+# Deve retornar: "Login realizado com sucesso"
 ```
 
 ### Logs e Debug:
