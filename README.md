@@ -5,70 +5,116 @@ Projeto base Laravel com componentes e padrões de desenvolvimento definidos.
 ## 📋 Índice
 
 - [Sobre o Projeto](#sobre-o-projeto)
-- [📖 Documentação de Componentes](#documentação-de-componentes)
-- [Estrutura do Projeto](#estrutura-do-projeto)
-- [Padrões de Desenvolvimento](#padrões-de-desenvolvimento)
+- [🚀 Quick Start](#quick-start)
+- [📖 Documentação](#documentação)
+- [🛡️ Segurança](#segurança)
+- [🤝 Contribuição](#contribuição)
 
 ---
 
-## 📖 Documentação de Componentes
+## 🚀 Quick Start
 
-**📚 Para documentação completa e exemplos de uso dos componentes, consulte:**
-**[docs/README.md](docs/README.md)**
+### ⚡ Para Desenvolvedores - Setup Rápido:
+
+**📖 [Instruções Completas de Desenvolvimento → README-DEV.md](README-DEV.md)**
+
+```bash
+# 1. Clone e instale
+git clone [repo]
+cd base-laravel-v2
+composer install && npm install
+
+# 2. Configure
+cp .env.example .env
+php artisan key:generate && php artisan jwt:secret
+
+# 3. Banco e migrations
+# Configure DB no .env
+php artisan migrate
+
+# 4. Desenvolvimento
+php artisan serve     # Terminal 1
+npm run dev          # Terminal 2
+```
+
+**📍 Acesse:** `http://localhost:8000`
 
 ---
 
 ## 🚀 Sobre o Projeto
 
-Base Laravel V2 é um projeto estruturado seguindo padrões específicos de desenvolvimento para JavaScript, Sass e Blade. O projeto utiliza Vite para bundling e está configurado para desenvolvimento moderno com componentes reutilizáveis.
+Base Laravel V2 é um projeto estruturado seguindo padrões específicos de desenvolvimento para JavaScript, Sass e Blade. 
+
+### 🎯 Características:
+- **Laravel 10.x** com **Vite** para bundling
+- **Autenticação JWT** integrada
+- **Componentes reutilizáveis** (Toast, Preload, Header)
+- **Padrões de código** definidos e documentados
+- **Proteções de segurança** automáticas
+- **Documentação completa** de componentes
+
+### 🛠️ Stack Tecnológica:
+- **Backend**: Laravel 10.x + PHP 8.1+ + JWT Auth
+- **Frontend**: Vite + Sass + jQuery + ES6+
+- **Banco**: MySQL/PostgreSQL
+- **Build**: Vite (HMR + Bundling otimizado)
 
 ---
 
-## 📁 Estrutura do Projeto
+## 📖 Documentação
 
-```
-├── docs/                       // 📚 Documentação dos componentes
-│   ├── README.md               // Índice da documentação
-│   ├── toast.md                // Documentação do sistema Toast
-│   ├── preload.md              // Documentação do sistema Preload
-│   ├── request.md              // Documentação do cliente HTTP
-│   └── error-handling.md       // Sistema de captura de erros
-├── resources/
-│   ├── js/
-│   │   ├── app.js              // Entry point com jQuery + Error handling
-│   │   ├── components/         // Componentes reutilizáveis
-│   │   │   ├── Toast.js        // Sistema de notificações
-│   │   │   └── Preload.js      // Sistema de loading
-│   │   ├── pages/              // Scripts específicos por página  
-│   │   └── class/              // Classes utilitárias
-│   │       └── Request.js      // Cliente HTTP com Axios
-│   ├── sass/
-│   │   ├── app.sass            // Variáveis e cores globais
-│   │   ├── components/         // Estilos de componentes
-│   │   │   ├── Toast.sass      // Estilos do sistema Toast
-│   │   │   └── Preload.sass    // Estilos do sistema Preload
-│   │   └── pages/              // Estilos específicos por página
-│   └── views/
-│       ├── layouts/            // Layouts Blade
-│       ├── components/         // Componentes Blade
-│       │   └── preload.blade.php // Componente de loading
-│       └── pages/              // Views específicas
-```
+### 🛠️ Para Desenvolvimento:
+**[📋 Guia Completo de Desenvolvimento](README-DEV.md)**
+- Instalação e configuração
+- Comandos de desenvolvimento  
+- Build e deploy
+- Troubleshooting
+
+### 📚 Componentes do Sistema:
+**[📖 Documentação de Componentes](docs/README.md)**
+- Sistema Toast (notificações)
+- Sistema Preload (loading)
+- Classe Request (HTTP client)
+- Header com sidebar
+- E mais...
+
+### 🎨 Padrões de Código:
+**[📐 Padrões de Desenvolvimento](.instructions.md)**
+- JavaScript (ES6+, jQuery, classes)
+- Sass (cascata, BEM, mobile-first)
+- Blade (componentes, semântica)
 
 ---
 
-## 📐 Padrões de Desenvolvimento
+## 🛡️ Segurança
 
-Para informações detalhadas sobre os padrões de código JavaScript, Sass e Blade utilizados neste projeto, consulte o arquivo [`.instructions.md`](.instructions.md).
+### ⚠️ Proteção Contra Comandos Destrutivos
 
-### Principais Convenções:
-- **JavaScript**: ES6+, classes organizadas, HTML strings concatenadas com `+`
-- **Sass**: Sintaxe indentada, padrão cascata, cores do `app.sass`
-- **Blade**: Componentes reutilizáveis, HTML semântico
-- **Responsividade**: Mobile-first approach
-- **Acessibilidade**: WCAG compliance
+O projeto bloqueia automaticamente comandos destrutivos (`migrate:fresh`, `db:wipe`, etc.) para evitar acidentes. Para executar quando necessário, comente a proteção em `routes/console.php`.
+
+**Mais detalhes:** [README-DEV.md - Troubleshooting](README-DEV.md#troubleshooting)
 
 ---
+
+## 🤝 Contribuição
+
+1. **Fork** do projeto
+2. **Leia** os padrões em [.instructions.md](.instructions.md) 
+3. **Desenvolva** seguindo a documentação
+4. **Teste** suas alterações
+5. **Submit** pull request
+
+### 📋 Antes de Contribuir:
+- [ ] Ler [README-DEV.md](README-DEV.md) para setup
+- [ ] Seguir padrões do [.instructions.md](.instructions.md)
+- [ ] Testar componentes criados/modificados
+- [ ] Documentar mudanças significativas
+
+**💡 Dúvidas?** Consulte a [documentação completa](docs/README.md) ou abra uma issue.
+
+---
+
+**🚀 Desenvolvido com ❤️ usando Laravel + Vite + JWT**
 
 ## 📝 Licença e Informações Adicionais
 

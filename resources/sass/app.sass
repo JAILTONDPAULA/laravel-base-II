@@ -159,3 +159,31 @@
     padding:0
     box-sizing: border-box
     font-family: 'Poppins', sans-serif
+
+body
+    background: linear-gradient(0deg, var(--primary-400), var(--primary-700))
+    width: 100vw
+    height: 100vh
+    .elements-screem
+        position: fixed
+        inset: 0
+        z-index: -1
+        .circle-one
+            position: absolute
+            width: 75vw
+            height: 75vw
+            border-radius: 50%
+            background: white
+            opacity: 0.15
+            bottom: -40vw
+            left: -10vw
+            &.segundo
+                position: absolute
+                width: 50vw
+                height: 50vw
+                border-radius: 50%
+                background: white
+                opacity: 0.15
+                top: -40vw
+                right: -10vw
+                left: auto

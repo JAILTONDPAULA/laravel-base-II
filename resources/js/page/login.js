@@ -1,6 +1,4 @@
-import './../app.js';
 import AutenticarApi from '../apis/AutenticarApi.js';
-import Preload from '../components/Preload.js';
 
 class Page {
     static events = {
