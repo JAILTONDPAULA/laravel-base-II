@@ -1,0 +1,30 @@
+.group-input
+    display: flex
+    flex-direction: column
+    gap: 2px
+    label
+        font-size: 0.8rem
+        font-weight: 600
+        color: var(--text-color-secondary)
+        user-select: none
+        letter-spacing: 0.5px
+        font-style: italic
+    input
+        padding: 0.5rem
+        border: none
+        border-bottom: 1px solid var(--gray-300)
+        outline: none
+        transition: 0.2s
+        background: white
+        &:focus-visible
+            border-color: var(--primary-500)
+        &:invalid:not(:focus):not(:placeholder-shown)
+            border-color: var(--red-500)
+    &.password
+        position: relative
+        >div
+            position: absolute
+            right: 0.5rem
+            bottom: 0.4rem
+            cursor: pointer
+            user-select: none

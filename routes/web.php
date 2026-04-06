@@ -6,8 +6,9 @@ Route::get('/', function () {
     return view('pages.home');
 });
 
-Route::get('/login', function () {
-    return view('pages.login');
+Route::prefix('auth')->group(function () {
+    Route::get('/login', fn () => view('pages.auth.login'))->name('login');
+    Route::get('/reset', fn () => view('pages.auth.reset'))->name('reset');
 });
 
 

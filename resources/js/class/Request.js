@@ -36,7 +36,7 @@ export default class Request {
                     errorText = error.message;
                 }
 
-                Toast.error(errorText.slice(1, 200));
+                Toast.error(errorText.slice(0, 200));
             }
         });
 

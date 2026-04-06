@@ -15,7 +15,7 @@ Artisan::command('inspire', function () {
 // Comandos destrutivos bloqueados
 $destructiveCommands = [
     'migrate:fresh',
-    'migrate:reset', 
+    'migrate:reset',
     'migrate:rollback',
     'db:wipe',
     'db:seed',

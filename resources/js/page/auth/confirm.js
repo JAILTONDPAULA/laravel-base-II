@@ -1,4 +1,4 @@
-import AutenticarApi from '../apis/AutenticarApi.js';
+import AutenticarApi from '../../apis/AutenticarApi.js';
 
 class Page {
     static events = {

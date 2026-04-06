@@ -82,7 +82,7 @@ export default class Header {
             localStorage.removeItem('email');
 
             // Redirecionar para login
-            window.location.href = '/login';
+            window.location.href = '/auth/login';
         },
 
         isLoggedIn() {
@@ -97,8 +97,8 @@ export default class Header {
         },
 
         checkAndRedirect() {
-            if (!Header.auth.isLoggedIn() && !['/login', '/senha'].includes(location.pathname)) {
-                window.location.href = '/login';
+            if (!Header.auth.isLoggedIn() && !['/auth/login', '/auth/reset'].includes(location.pathname)) {
+                window.location.href = '/auth/login';
             }
         }
     }

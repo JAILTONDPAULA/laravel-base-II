@@ -1,7 +1,7 @@
 @extends('layout.main')
 @section('title', 'Login')
 @section('head')
-@vite(['resources/js/page/login.js', 'resources/sass/pages/login.sass'])
+@vite(['resources/js/page/auth/login.js', 'resources/sass/pages/auth/login.sass'])
 @endsection
 @section('content')
 <section class="containerpage">
@@ -20,14 +20,15 @@
                 <label for="email">E-mail</label>
                 <input type="email" name="email" id="email" placeholder="Digite seu e-mail" required>
             </div>
-            <div class="group-input">
+            <div class="group-input password">
                 <label for="password">Senha</label>
                 <input type="password" name="password" id="password" placeholder="Digite sua senha" required>
+                <div>🙈</div>
             </div>
             <button type="submit">Entrar</button>
         </section>
         <section class="footer">
-            <a href="#">Esqueci minha senha</a>
+            <a href="{{ route('reset') }}">Esqueci minha senha</a>
             <small>TraumFabrik &copy; {{ date('Y') }}</small>
         </section>
     </form>

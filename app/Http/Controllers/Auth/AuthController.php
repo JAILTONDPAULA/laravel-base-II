@@ -2,8 +2,13 @@
 
 namespace App\Http\Controllers\Auth;
 
+use App\Helpers\EmailHelper;
 use App\Http\Controllers\Controller;
+use App\Mail\SendMail;
 use App\Models\User;
+use App\Services\EmailService;
+use App\Services\ResetPassword;
+use App\Services\ValidarUsuario;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use Tymon\JWTAuth\Facades\JWTAuth;
@@ -61,5 +66,38 @@ class AuthController extends Controller
             'expires_in' => JWTAuth::factory()->getTTL() * 60, // em segundos
             'user' => JWTAuth::user()
         ]);
+    }
+
+    public function reset(Request $request)
+    {
+        $validator = Validator::make($request->all(), [
+            'email' => 'required|email',
+        ]);
+
+        if ($validator->fails()) {
+            return response($validator->errors()->first(), 422);
+        }
+
+        try {
+            $resetPassword = new ResetPassword($request->email);
+            $resetPassword->resetPassword();
+            $token = $resetPassword->token->token;
+            $user  = $resetPassword->user;
+            EmailHelper::sendPasswordResetEmail(
+                view: 'emails.password-reset',
+                data: [
+                    'name'      => $user->name,
+                    'token'     => $token,
+                    'resetUrl' => route('reset', ['token' => base64_encode($token), 'email' => base64_encode($user->email)]),
+                    'url'      => route('reset', ['token' => base64_encode($token), 'email' => base64_encode($user->email)]),
+                    'showToken' => true
+                ],
+                to: $user->email,
+                subject: '🔐 Redefinição de Senha - ' . config('app.name')
+            );
+            return response()->json(['message' => 'Link de reset enviado para o e-mail informado']);
+        } catch (\Throwable $th) {
+            return response($th->getMessage(), 500);
+        }
     }
 }

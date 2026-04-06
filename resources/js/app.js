@@ -1,8 +1,9 @@
-import $       from 'jquery';
-import Request from './class/Request.js';
-import Toast   from './components/Toast.js';
-import Preload from './components/Preload.js';
-import Header  from './components/Header.js';
+import $          from 'jquery';
+import Request    from './class/Request.js';
+import InputGroup from './class/InputGroup.js';
+import Toast      from './components/Toast.js';
+import Preload    from './components/Preload.js';
+import Header     from './components/Header.js';
 
 window.$       = $;
 window.jQuery  = $;
@@ -15,6 +16,7 @@ class App {
     static events = {
         init() {
             App.events.dom();
+            InputGroup.events.init();
         },
         dom() {
             // Captura erros síncronos de JavaScript
