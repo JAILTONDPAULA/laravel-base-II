@@ -12,11 +12,11 @@ class TokenService
         }
 
         // Valida se o token foi criado há mais de 5 minutos
-        if($token->created_at && $token->created_at->lt(now()->subMinutes(5))) {
+        if($token->registrado && $token->registrado->lt(now()->subMinutes(5))) {
             throw new \Exception('Token expirado - criado há mais de 5 minutos');
         }
 
-        if($token->registrado < now()) {
+        if($token->registrado > now()) {
             throw new \Exception('Token expirado');
         }
 

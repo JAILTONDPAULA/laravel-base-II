@@ -7,6 +7,7 @@ Este documento contém todas as instruções técnicas para configurar e desenvo
 - [Pré-requisitos](#pré-requisitos)
 - [Instalação](#instalação)
 - [Configuração](#configuração)
+- [Configuração de E-mail](#-configuração-de-e-mail)
 - [Desenvolvimento](#desenvolvimento)
 - [Build e Deploy](#build-e-deploy)
 - [Troubleshooting](#troubleshooting)
@@ -106,9 +107,22 @@ JWT_SECRET=sua_chave_jwt_aqui
 JWT_TTL=1440
 JWT_REFRESH_TTL=20160
 
+# E-mail
+MAIL_MAILER=smtp
+MAIL_SCHEME=null
+MAIL_HOST=smtp.exemplo.com
+MAIL_PORT=587
+MAIL_USERNAME=seu_email@exemplo.com
+MAIL_PASSWORD=sua_senha_email
+MAIL_FROM_ADDRESS=noreply@exemplo.com
+MAIL_FROM_NAME="${APP_NAME}"
+
 # Vite (desenvolvimento)
 VITE_APP_NAME="${APP_NAME}"
 ```
+
+> **Dica para desenvolvimento local:** Use o [Mailtrap](https://mailtrap.io/) ou [Mailpit](https://mailpit.axllent.org/) como `MAIL_HOST` para capturar e-mails sem enviá-los de verdade.
+> Para apenas logar os e-mails em `storage/logs/laravel.log`, defina `MAIL_MAILER=log`.
 
 ### 2. Banco de Dados
 ```bash
@@ -125,7 +139,63 @@ php artisan db:seed
 
 ---
 
-## 🚀 Desenvolvimento
+## � Configuração de E-mail
+
+### Variáveis de Ambiente (`.env`)
+
+| Variável | Descrição | Exemplo |
+|---|---|---|
+| `MAIL_MAILER` | Driver de envio (`smtp`, `log`, `array`) | `smtp` |
+| `MAIL_SCHEME` | Esquema de segurança (`null`, `ssl`, `tls`) | `null` |
+| `MAIL_HOST` | Servidor SMTP | `smtp.gmail.com` |
+| `MAIL_PORT` | Porta SMTP | `587` |
+| `MAIL_USERNAME` | Usuário/e-mail da conta | `seu@email.com` |
+| `MAIL_PASSWORD` | Senha ou App Password | `sua_senha` |
+| `MAIL_FROM_ADDRESS` | Endereço remetente padrão | `noreply@seusite.com` |
+| `MAIL_FROM_NAME` | Nome remetente padrão | `"${APP_NAME}"` |
+
+### Configurações por Provedor
+
+#### **Gmail**
+```env
+MAIL_MAILER=smtp
+MAIL_SCHEME=null
+MAIL_HOST=smtp.gmail.com
+MAIL_PORT=587
+MAIL_USERNAME=seu@gmail.com
+MAIL_PASSWORD=sua_app_password
+MAIL_FROM_ADDRESS=seu@gmail.com
+MAIL_FROM_NAME="${APP_NAME}"
+```
+> Requer **App Password** habilitado na conta Google (não use a senha normal).
+
+#### **Mailtrap (desenvolvimento)**
+```env
+MAIL_MAILER=smtp
+MAIL_SCHEME=null
+MAIL_HOST=sandbox.smtp.mailtrap.io
+MAIL_PORT=2525
+MAIL_USERNAME=seu_usuario_mailtrap
+MAIL_PASSWORD=sua_senha_mailtrap
+MAIL_FROM_ADDRESS=noreply@localhost.dev
+MAIL_FROM_NAME="${APP_NAME}"
+```
+
+#### **Log (sem envio real — debug)**
+```env
+MAIL_MAILER=log
+```
+> Os e-mails são gravados em `storage/logs/laravel.log`.
+
+### Testar Envio de E-mail
+```bash
+php artisan tinker
+>>> Mail::raw('Teste de e-mail', fn ($m) => $m->to('destino@teste.com')->subject('Teste'));
+```
+
+---
+
+## �🚀 Desenvolvimento
 
 ### Comandos para Iniciar Desenvolvimento:
 

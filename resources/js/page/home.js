@@ -1,3 +1,4 @@
+import './../../sass/pages/home.sass';
 class Page {
     static events = {
         init() {

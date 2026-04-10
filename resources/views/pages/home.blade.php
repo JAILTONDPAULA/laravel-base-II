@@ -1,7 +1,7 @@
 @extends('layout.main')
 @section('titulo', 'Home')
 @section('head')
-@vite(['resources/js/page/home.js', 'resources/sass/pages/home.sass'])
+@vite(['resources/js/page/home.js'])
 @endsection
 @section('content')
 <x-header/>

@@ -1,7 +1,7 @@
 @extends('layout.main')
 @section('title', 'Reset de Senha')
 @section('head')
-@vite(['resources/js/page/auth/reset.js', 'resources/sass/pages/auth/reset.sass'])
+@vite(['resources/js/page/auth/reset.js'])
 @endsection
 @section('content')
 <section class="containerpage">
@@ -52,18 +52,18 @@
                 <div class="checklist">
                     <p>Requisitos da senha:</p>
                     <ul>
-                        <li id="length" class="invalid">Mínimo de 8 caracteres</li>
+                        <li id="length"    class="invalid">Mínimo de 8 caracteres</li>
                         <li id="uppercase" class="invalid">Pelo menos uma letra maiúscula</li>
                         <li id="lowercase" class="invalid">Pelo menos uma letra minúscula</li>
-                        <li id="number" class="invalid">Pelo menos um número</li>
-                        <li id="special" class="invalid">Pelo menos um caractere especial</li>
+                        <li id="number"    class="invalid">Pelo menos um número</li>
+                        <li id="special"   class="invalid">Pelo menos um caractere especial</li>
                     </ul>
                 </div>
-                <button type="submit">Redefinir Senha</button>
+                <button type="submit" id="btn-reset-password" disabled>Redefinir Senha</button>
             </div>
         </section>
         <section class="footer">
-            <button type="button">Solicitar Novo Token</button>
+            <button type="button" id="btn-new-token">Solicitar Novo Token</button>
             <a href="{{ route('login') }}">Voltar para o login</a>
             <small>TraumFabrik &copy; {{ date('Y') }}</small>
         </section>

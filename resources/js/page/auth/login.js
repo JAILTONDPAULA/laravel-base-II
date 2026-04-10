@@ -1,3 +1,4 @@
+import './../../../sass/pages/auth/login.sass';
 import AutenticarApi from '../../apis/AutenticarApi.js';
 
 class Page {

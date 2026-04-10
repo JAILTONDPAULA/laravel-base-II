@@ -13,6 +13,7 @@ Route::prefix('auth')->group(function () {
     Route::post('/reset', [AuthController::class, 'reset']);
     Route::prefix('token')->group(function () {
         Route::get('/validar', [TokenController::class, 'valid']);
+        Route::post('/reset-password', [TokenController::class, 'resetPassword']);
     });
 });
 

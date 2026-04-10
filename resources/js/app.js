@@ -1,16 +1,20 @@
+import './../sass/app.sass';
 import $          from 'jquery';
 import Request    from './class/Request.js';
 import InputGroup from './class/InputGroup.js';
+import UriService from './class/UriService.js';
 import Toast      from './components/Toast.js';
 import Preload    from './components/Preload.js';
 import Header     from './components/Header.js';
 
-window.$       = $;
-window.jQuery  = $;
-window.Toast   = Toast;
-window.Request = Request;
-window.Preload = Preload;
-window.Header  = Header;
+window.$          = $;
+window.jQuery     = $;
+window.Toast      = Toast;
+window.Request    = Request;
+window.Preload    = Preload;
+window.Header     = Header;
+window.UriService = UriService;
+
 
 class App {
     static events = {

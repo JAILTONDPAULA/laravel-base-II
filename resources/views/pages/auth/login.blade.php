@@ -1,7 +1,7 @@
 @extends('layout.main')
 @section('title', 'Login')
 @section('head')
-@vite(['resources/js/page/auth/login.js', 'resources/sass/pages/auth/login.sass'])
+@vite(['resources/js/page/auth/login.js'])
 @endsection
 @section('content')
 <section class="containerpage">
