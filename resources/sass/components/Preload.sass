@@ -1,0 +1,44 @@
+.containerpreload
+    position: fixed
+    inset: 0
+    background: #ffffff
+    display: flex
+    justify-content: center
+    align-items: center
+    z-index: 10
+
+.preload__content
+    text-align: center
+
+.preload__bar
+    width: 200px
+    height: 4px
+    background: var(--surface-200)
+    border-radius: 2px
+    overflow: hidden
+    margin-bottom: 1rem
+
+    @media (max-width: 768px)
+        width: 150px
+        height: 3px
+
+.preload__progress
+    height: 100%
+    background: linear-gradient(to right, transparent, var(--primary-color))
+    border-radius: 2px
+    animation: loading .8s linear infinite
+    transform-origin: left center
+
+.preload__message
+    color: var(--text-color)
+    font-size: 0.9rem
+    margin: 0
+
+    @media (max-width: 768px)
+        font-size: 0.8rem
+
+@keyframes loading
+    0%
+        transform: translateX(-100%)
+    100%
+        transform: translateX(100%)

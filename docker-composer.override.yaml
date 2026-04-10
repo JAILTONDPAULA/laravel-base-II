@@ -1,0 +1,5 @@
+services:
+    laravel-base:
+        build: .
+        volumes:
+            - '.:/var/www/html'

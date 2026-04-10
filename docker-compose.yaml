@@ -1,0 +1,14 @@
+services:
+    laravel-base:
+        # image: user/project:latest
+        build: .
+        volumes:
+            - '.:/var/www/html'
+        container_name: laravel-base-app
+        ports:
+            - '8081:80'
+        networks:
+            - mynetwork
+networks:
+    mynetwork:
+        driver: bridge
